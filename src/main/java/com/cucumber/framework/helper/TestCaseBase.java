@@ -1,16 +1,21 @@
 /**
- * rsr 
- *
- *Aug 6, 2016
+ * @author rahul.rathore
+ *	
+ *	16-Aug-2016
  */
 package com.cucumber.framework.helper;
 
-
 /**
- * @author rsr
+ * @author rahul.rathore
+ *	
+ *	16-Aug-2016
  *
- *         Aug 6, 2016
  */
-public class TestCaseBase extends InitializeWebDrive {
+public class TestCaseBase {
+	protected InitializeWebDrive Driver; 
+	
+	public TestCaseBase(){
+		//Driver = new InitializeWebDrive();
+	}
 
 }
