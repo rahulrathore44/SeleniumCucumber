@@ -5,10 +5,9 @@
  */
 package com.cucumber.framework.settings;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
-
 import org.openqa.selenium.WebDriver;
+
+import com.cucumber.framework.interfaces.IconfigReader;
 
 /**
  * @author rsr
@@ -17,6 +16,7 @@ import org.openqa.selenium.WebDriver;
  */
 public class ObjectRepo {
 	
-	public static Map<String, WebDriver> data = new LinkedHashMap<String, WebDriver>();
+	public static WebDriver driver;
+	public static IconfigReader reader;
 	
 }

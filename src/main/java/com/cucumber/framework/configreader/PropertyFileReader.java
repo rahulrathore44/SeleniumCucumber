@@ -24,10 +24,17 @@ public class PropertyFileReader implements IconfigReader {
 	private Properties prop = null;
 
 	public PropertyFileReader() {
-		this("config.properties");
+		prop = new Properties();
+		try {
+			prop.load(ResourceHelper
+					.getResourcePathInputStream("configfile/"
+							+ "config.properties"));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
-	public PropertyFileReader(String fileName) {
+	/*public PropertyFileReader(String fileName) {
 
 		prop = new Properties();
 		try {
@@ -37,7 +44,7 @@ public class PropertyFileReader implements IconfigReader {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	}
+	}*/
 
 	public String getUserName() {
 		return prop.getProperty("Username");

@@ -10,7 +10,7 @@ import cucumber.api.testng.AbstractTestNGCucumberTests;
 
 
 @CucumberOptions(features = { "classpath:com/cucumber/framework/featurefile/Search.feature" }, 
-		glue="com.cucumber.framework1.stepdefinition",
+		glue={"classpath:com.cucumber.framework.stepdefinition","classpath:com.cucumber.framework.helper"},
 		format={"pretty"})
 public class CucumberRunner extends AbstractTestNGCucumberTests {
 }
