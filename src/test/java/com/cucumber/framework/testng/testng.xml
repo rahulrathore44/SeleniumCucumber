@@ -3,7 +3,7 @@
 <suite name="Suite">
 	<test name="Test - 1">
 		<classes>
-			<class name="com.cucumber.framework.runner.CucumberRunner" />
+			<class name="com.cucumber.framework1.runner.CucumberRunner" />
 		</classes>
 	</test>
 </suite> 

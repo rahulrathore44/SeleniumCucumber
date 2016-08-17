@@ -10,6 +10,10 @@ import java.util.concurrent.TimeUnit;
 
 import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Optional;
+import org.testng.annotations.Parameters;
 
 import com.cucumber.framework.configreader.PropertyFileReader;
 import com.cucumber.framework.configuration.browser.BrowserType;
@@ -33,18 +37,13 @@ import com.cucumber.framework.helper.Wait.WaitHelper;
 import com.cucumber.framework.interfaces.IconfigReader;
 import com.cucumber.framework.settings.ObjectRepo;
 
-import cucumber.api.java.After;
-import cucumber.api.java.Before;
-
-
-
 /**
  * @author rsr
  *
  *         Aug 5, 2016
  */
 
-public class InitializeWebDrive {
+public abstract class InitializeWebDrive {
 
 	private volatile WebDriver driver;
 	private volatile IconfigReader reader;
@@ -79,13 +78,13 @@ public class InitializeWebDrive {
 		}
 	}
 
-	public InitializeWebDrive(PropertyFileReader reader) {
-		this.reader = reader;
+	protected InitializeWebDrive() {
+		reader = new PropertyFileReader();
 	}
 
-	/*protected InitializeWebDrive(String fileName) {
+	protected InitializeWebDrive(String fileName) {
 		reader = new PropertyFileReader(fileName);
-	}*/
+	}
 
 	public WebDriver getDriver() {
 		return driver;
@@ -131,11 +130,11 @@ public class InitializeWebDrive {
 		}
 	}
 
-	public WebDriver standAloneStepUp(BrowserType bType) throws Exception {
+	public WebDriver standAloneStepUp() throws Exception {
 		
-		oLog.info(bType);
+		oLog.info(reader.getBrowser());
 		
-		switch (bType) {
+		switch (reader.getBrowser()) {
 		
 		case Chrome:
 			ChromeBrowser chrome = ChromeBrowser.class.newInstance();
@@ -165,53 +164,19 @@ public class InitializeWebDrive {
 			throw new NoSutiableDriverFoundException(" Driver Not Found : "
 					+ reader.getBrowser());
 		}
+
 	}
 	
-	@Before
-	public void before() throws Exception {
-		//reader = new PropertyFileReader();
-		setUpDriver(reader.getBrowser());
-	}
-	
-	@After
-	public void after() throws Exception {
-		tearDownDriver();
-	}
-	
-	@Before("@firefox")
-	public void beforeFirefox() throws Exception {
-		setUpDriver(BrowserType.Firefox);
-	}
-	
-	@After("@firefox")
-	public void afterFirefox() throws Exception {
-		tearDownDriver();
-	}
-	
-	@Before("@chrome")
-	public void beforeChrome() throws Exception {
-		setUpDriver(BrowserType.Chrome);
-	}
-	
-	@After("@chrome")
-	public void afterChrome() throws Exception {
-		tearDownDriver();
-	}
-	
-	@Before("@phantomjs")
-	public void beforePhantomjs() throws Exception {
-		setUpDriver(BrowserType.PhantomJs);
-	}
-	
-	@After("@phantomjs")
-	public void afterPhantomjs() throws Exception {
-		tearDownDriver();
-	}
-	
-	
-	private void setUpDriver(BrowserType type) throws Exception {
-		//reader = new PropertyFileReader();
-		this.driver = standAloneStepUp(type);
+	@Parameters(value={"hubUrl","browser"})
+	@BeforeClass(alwaysRun = true)
+	public void setUpDriver(@Optional("") String hubUrl,@Optional("") String browser) throws Exception {
+		if(hubUrl.isEmpty() || browser.isEmpty())
+			this.driver = standAloneStepUp();
+		else 
+			this.driver = gridSetUp(hubUrl == null ? "http://localhost:4444/wd/hub" : hubUrl, 
+					browser == null ? "Chrome" : browser);
+			
+
 		oLog.debug("InitializeWebDrive : " + this.driver.hashCode());
 		driver.manage().timeouts()
 				.pageLoadTimeout(reader.getPageLoadTimeOut(), TimeUnit.SECONDS);
@@ -225,15 +190,17 @@ public class InitializeWebDrive {
 
 	}
 
-	private void tearDownDriver() throws Exception {
+	@AfterClass(alwaysRun = true)
+	public void tearDownDriver() throws Exception {
 		oLog.info("Shutting Down the driver");
 		try {
-			if (this.driver != null)
-				this.driver.quit();
+			if (driver != null)
+				driver.quit();
 		} catch (Exception e) {
 			oLog.error(e);
 			throw e;
 		}
+
 	}
 
 }
