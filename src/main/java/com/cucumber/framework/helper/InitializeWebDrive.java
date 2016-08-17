@@ -162,7 +162,6 @@ public class InitializeWebDrive {
 				.timeouts()
 				.implicitlyWait(ObjectRepo.reader.getImplicitWait(),
 						TimeUnit.SECONDS);
-		ObjectRepo.driver.get(ObjectRepo.reader.getWebsite());
 		ObjectRepo.driver.manage().window().maximize();
 
 	}

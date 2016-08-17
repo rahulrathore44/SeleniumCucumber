@@ -36,9 +36,13 @@ public class DropDownHelper extends GenericHelper {
 	}
 	
 	public void SelectUsingVisibleValue(By locator,String visibleValue) {
-		Select select = new Select(getElement(locator));
+		SelectUsingVisibleValue(getElement(locator),visibleValue);
+	}
+	
+	public void SelectUsingVisibleValue(WebElement element,String visibleValue) {
+		Select select = new Select(element);
 		select.selectByVisibleText(visibleValue);
-		oLog.info("Locator : " + locator + " Value : " + visibleValue);
+		oLog.info("Locator : " + element + " Value : " + visibleValue);
 	}
 	
 	public void SelectUsingValue(By locator,String value) {

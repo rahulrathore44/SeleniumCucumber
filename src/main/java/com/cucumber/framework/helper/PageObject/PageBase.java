@@ -15,7 +15,6 @@ import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -102,7 +101,10 @@ public abstract class PageBase{
 		this.driver = driver;
 	}
 	
-	@FindBy(how=How.XPATH,using="//div[@id='header']/ul[1]/li[11]/a")
-	public WebElement LogoutBtn;
+	public boolean checkForTitle(String title){
+		if(title == null || title.isEmpty())
+			throw new IllegalArgumentException(title);
+		return driver.getTitle().trim().contains(title);
+	}
 	
 }

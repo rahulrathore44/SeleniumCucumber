@@ -1,6 +1,6 @@
 Feature: Search feature of the web page
 
-  @phantomjs
+@phantomjs
   Scenario: Search based on laptops
     Given : I am at the home page
     When : I click on the laptops search filter
