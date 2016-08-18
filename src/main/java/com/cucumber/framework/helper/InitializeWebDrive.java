@@ -121,7 +121,7 @@ public class InitializeWebDrive {
 
 	@After("@firefox")
 	public void afterFirefox(Scenario scenario) throws Exception {
-		tearDownDriver();
+		tearDownDriver(scenario);
 		oLog.info("");
 	}
 
@@ -133,7 +133,7 @@ public class InitializeWebDrive {
 
 	@After("@chrome")
 	public void afterChrome(Scenario scenario) throws Exception {
-		tearDownDriver();
+		tearDownDriver(scenario);
 		oLog.info("");
 	}
 
@@ -145,7 +145,7 @@ public class InitializeWebDrive {
 
 	@After("@phantomjs")
 	public void afterPhantomjs(Scenario scenario) throws Exception {
-		tearDownDriver();
+		tearDownDriver(scenario);
 		oLog.info("");
 	}
 
@@ -166,7 +166,8 @@ public class InitializeWebDrive {
 
 	}
 
-	public void tearDownDriver() throws Exception {
+	public void tearDownDriver(Scenario scenario) throws Exception {
+		System.out.println(scenario.getName() + " : " + scenario.getStatus());
 		oLog.info("Shutting Down the driver");
 		try {
 			if (ObjectRepo.driver != null) {

@@ -9,6 +9,7 @@ import org.testng.Assert;
 
 import com.cucumber.framework.helper.PageObject.homepage.HomePage;
 import com.cucumber.framework.helper.PageObject.laptoppage.LaptopPage;
+import com.cucumber.framework.helper.PageObject.tabletpage.TabletPage;
 import com.cucumber.framework.settings.ObjectRepo;
 
 import cucumber.api.java.en.And;
@@ -26,6 +27,7 @@ public class SearchStepDfn {
 	
 	private HomePage hPage;
 	private LaptopPage lPage;
+	private TabletPage tPage;
 
 	@Given("^: I am at the home page$")
 	public void _i_am_at_the_home_page() throws Throwable {
@@ -37,16 +39,26 @@ public class SearchStepDfn {
 	public void _i_click_on_the_laptops_search_filter() throws Throwable {
 		lPage = hPage.navigateToLaptop();
 	}
+	
+	@When("^: I click on the tablet search filter$")
+    public void _i_click_on_the_tablet_search_filter() throws Throwable {
+		tPage = hPage.navigteToTablet();
+    }
 
-	@Then("^: I should be at the laptop search page$")
-	public void _i_should_be_at_the_laptop_search_page() throws Throwable {
-		Assert.assertEquals(lPage.getItems(),"36 items");
+	@Then("^: I should be at the laptop search page with \"([^\"]*)\"$")
+    public void _i_should_be_at_the_laptop_search_page_with_something(String items) throws Throwable {
+		Assert.assertEquals(lPage.getItems(),items);
 	}
-
-	@And("^: The title should be laptop search page title$")
-	public void _the_title_should_be_laptop_search_page_title()
+	
+	@Then("^: I should be at the tablet search page with \"([^\"]*)\"$")
+	public void _i_should_be_at_the_tablet_search_page_with_something(String items) throws Throwable {
+		Assert.assertEquals(tPage.getItems(),items);
+	}
+	
+	@And("^: The title should be \"([^\"]*)\" search page$")
+    public void _the_title_should_be_something_search_page(String title)
 			throws Throwable {
-		Assert.assertTrue(lPage.checkForTitle("Laptops"));
+		Assert.assertTrue(hPage.checkForTitle(title));
 	}
 
 }

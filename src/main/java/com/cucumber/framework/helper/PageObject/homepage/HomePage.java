@@ -91,7 +91,7 @@ public class HomePage extends PageBase {
 		return lPage;
 	}
 	
-	public TabletPage naviagteToTablet() {
+	public TabletPage navigteToTablet() {
 		tablets.click();
 		TabletPage tPage = new TabletPage(driver);
 		waitForElement(tPage.title, 60);
