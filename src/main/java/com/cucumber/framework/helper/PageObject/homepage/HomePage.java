@@ -62,7 +62,18 @@ public class HomePage extends PageBase {
 	@FindBy(how=How.XPATH,using="//div[@id='main-nav']//a[text()='productSort']")
 	public WebElement productSort;
 	
+	/** Default Methods **/
+	
+	String getMenuLocator(String name){
+		return "//div[@id='main-nav']//a[text()='" + name + "']";
+	}
+	
+	
 	/** Public Methods  **/
+	
+	public void navigateTo(String name) {
+		driver.findElement(By.xpath(getMenuLocator(name))).click();
+	}
 	
 	public void selectProductOrder(String order){
 		new DropDownHelper(driver).SelectUsingVisibleValue(productSort, order);

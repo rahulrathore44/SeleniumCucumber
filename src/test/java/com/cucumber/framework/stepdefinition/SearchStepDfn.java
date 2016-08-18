@@ -23,29 +23,30 @@ import cucumber.api.java.en.When;
  *
  */
 public class SearchStepDfn {
+	
+	private HomePage hPage;
+	private LaptopPage lPage;
 
 	@Given("^: I am at the home page$")
 	public void _i_am_at_the_home_page() throws Throwable {
 		ObjectRepo.driver.get(ObjectRepo.reader.getWebsite());
-		HomePage hPage = new HomePage(ObjectRepo.driver);
-		ObjectRepo.data.put(HomePage.class, hPage);
+		hPage = new HomePage(ObjectRepo.driver);
 	}
 
 	@When("^: I click on the laptops search filter$")
 	public void _i_click_on_the_laptops_search_filter() throws Throwable {
-		LaptopPage lPage = ((HomePage)ObjectRepo.data.get(HomePage.class)).navigateToLaptop();
-		ObjectRepo.data.put(LaptopPage.class, lPage);
+		lPage = hPage.navigateToLaptop();
 	}
 
 	@Then("^: I should be at the laptop search page$")
 	public void _i_should_be_at_the_laptop_search_page() throws Throwable {
-		Assert.assertEquals(((LaptopPage)ObjectRepo.data.get(LaptopPage.class)).getItems(),"36 items");
+		Assert.assertEquals(lPage.getItems(),"36 items");
 	}
 
 	@And("^: The title should be laptop search page title$")
 	public void _the_title_should_be_laptop_search_page_title()
 			throws Throwable {
-		Assert.assertTrue(((LaptopPage)ObjectRepo.data.get(LaptopPage.class)).checkForTitle("Laptops"));
+		Assert.assertTrue(lPage.checkForTitle("Laptops"));
 	}
 
 }
