@@ -67,7 +67,7 @@
 						</property>
 					</properties>
 					<suiteXmlFiles>
-						<suiteXmlFile>src/test/java/testngxmls/testng.xml</suiteXmlFile>
+						<suiteXmlFile>src/test/java/testng/testng.xml</suiteXmlFile>
 					</suiteXmlFiles>
 				</configuration>
 				<dependencies>
@@ -168,6 +168,10 @@
 			<artifactId>cucumber-picocontainer</artifactId>
 			<version>1.2.4</version>
 		</dependency>
-
+		<dependency>
+			<groupId>net.masterthought</groupId>
+			<artifactId>cucumber-reporting</artifactId>
+			<version>2.7.0</version>
+		</dependency>
 	</dependencies>
 </project>

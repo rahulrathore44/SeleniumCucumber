@@ -33,16 +33,19 @@ public class SearchStepDfn {
 	public void _i_am_at_the_home_page() throws Throwable {
 		ObjectRepo.driver.get(ObjectRepo.reader.getWebsite());
 		hPage = new HomePage(ObjectRepo.driver);
+		ObjectRepo.data.put("HomePage", hPage);
 	}
 
 	@When("^: I click on the laptops search filter$")
 	public void _i_click_on_the_laptops_search_filter() throws Throwable {
 		lPage = hPage.navigateToLaptop();
+		ObjectRepo.data.put("LaptopPage", lPage);
 	}
 	
 	@When("^: I click on the tablet search filter$")
     public void _i_click_on_the_tablet_search_filter() throws Throwable {
 		tPage = hPage.navigteToTablet();
+		ObjectRepo.data.put("TabletPage", tPage);
     }
 
 	@Then("^: I should be at the laptop search page with \"([^\"]*)\"$")

@@ -19,6 +19,7 @@ import com.cucumber.framework.configuration.browser.HtmlUnitBrowser;
 import com.cucumber.framework.configuration.browser.IExploreBrowser;
 import com.cucumber.framework.configuration.browser.PhantomJsBrowser;
 import com.cucumber.framework.exception.NoSutiableDriverFoundException;
+import com.cucumber.framework.helper.Generic.GenericHelper;
 import com.cucumber.framework.helper.Logger.LoggerHelper;
 import com.cucumber.framework.settings.ObjectRepo;
 
@@ -77,40 +78,57 @@ public class InitializeWebDrive {
 	}
 
 	public WebDriver standAloneStepUp(BrowserType bType) throws Exception {
+		try {
+			oLog.info(bType);
 
-		oLog.info(bType);
+			switch (bType) {
 
-		switch (bType) {
+			case Chrome:
+				ChromeBrowser chrome = ChromeBrowser.class.newInstance();
+				return chrome.getChromeDriver(chrome.getChromeCapabilities());
 
-		case Chrome:
-			ChromeBrowser chrome = ChromeBrowser.class.newInstance();
-			return chrome.getChromeDriver(chrome.getChromeCapabilities());
+			case Firefox:
+				FirefoxBrowser firefox = FirefoxBrowser.class.newInstance();
+				return firefox.getFirefoxDriver(firefox
+						.getFirefoxCapabilities());
 
-		case Firefox:
-			FirefoxBrowser firefox = FirefoxBrowser.class.newInstance();
-			return firefox.getFirefoxDriver(firefox.getFirefoxCapabilities());
+			case HtmlUnitDriver:
+				HtmlUnitBrowser htmlUnit = HtmlUnitBrowser.class.newInstance();
+				return htmlUnit.getHtmlUnitDriver(htmlUnit
+						.getHtmlUnitDriverCapabilities());
 
-		case HtmlUnitDriver:
-			HtmlUnitBrowser htmlUnit = HtmlUnitBrowser.class.newInstance();
-			return htmlUnit.getHtmlUnitDriver(htmlUnit
-					.getHtmlUnitDriverCapabilities());
+			case Iexplorer:
+				IExploreBrowser iExplore = IExploreBrowser.class.newInstance();
+				return iExplore.getIExplorerDriver(iExplore
+						.getIExplorerCapabilities());
 
-		case Iexplorer:
-			IExploreBrowser iExplore = IExploreBrowser.class.newInstance();
-			return iExplore.getIExplorerDriver(iExplore
-					.getIExplorerCapabilities());
+			case PhantomJs:
+				PhantomJsBrowser jsBrowser = PhantomJsBrowser.class
+						.newInstance();
+				return jsBrowser.getPhantomJsDriver(
+						jsBrowser.getPhantomJsService(),
+						jsBrowser.getPhantomJsCapability());
 
-		case PhantomJs:
-			PhantomJsBrowser jsBrowser = PhantomJsBrowser.class.newInstance();
-			return jsBrowser.getPhantomJsDriver(
-					jsBrowser.getPhantomJsService(),
-					jsBrowser.getPhantomJsCapability());
-
-		default:
-			throw new NoSutiableDriverFoundException(" Driver Not Found : "
-					+ ObjectRepo.reader.getBrowser());
+			default:
+				throw new NoSutiableDriverFoundException(" Driver Not Found : "
+						+ ObjectRepo.reader.getBrowser());
+			}
+		} catch (Exception e) {
+			oLog.equals(e);
+			throw e;
 		}
+	}
+	
+	@Before
+	public void before() throws Exception {
+		setUpDriver(ObjectRepo.reader.getBrowser());
+		oLog.info(ObjectRepo.reader.getBrowser());
+	}
 
+	@After
+	public void after(Scenario scenario) throws Exception {
+		tearDownDriver(scenario);
+		oLog.info("");
 	}
 
 	@Before("@firefox")
@@ -167,19 +185,22 @@ public class InitializeWebDrive {
 	}
 
 	public void tearDownDriver(Scenario scenario) throws Exception {
-		System.out.println(scenario.getName() + " : " + scenario.getStatus());
-		oLog.info("Shutting Down the driver");
+		
 		try {
 			if (ObjectRepo.driver != null) {
+				
+				if(scenario.isFailed())
+					scenario.write(new GenericHelper(ObjectRepo.driver).takeScreenShot(scenario.getName()));
+				
 				ObjectRepo.driver.quit();
 				ObjectRepo.reader = null;
 				ObjectRepo.driver = null;
+				oLog.info("Shutting Down the driver");
 			}
 		} catch (Exception e) {
 			oLog.error(e);
 			throw e;
 		}
-
 	}
 
 }

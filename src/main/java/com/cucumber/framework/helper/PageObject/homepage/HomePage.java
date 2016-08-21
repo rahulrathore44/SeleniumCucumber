@@ -8,9 +8,11 @@ import org.openqa.selenium.support.How;
 
 import com.cucumber.framework.helper.DropDown.DropDownHelper;
 import com.cucumber.framework.helper.PageObject.PageBase;
+import com.cucumber.framework.helper.PageObject.itemsbag.ItemsBag;
 import com.cucumber.framework.helper.PageObject.laptoppage.LaptopPage;
 import com.cucumber.framework.helper.PageObject.tabletpage.TabletPage;
 import com.cucumber.framework.helper.TextBox.TextBoxHelper;
+import com.cucumber.framework.settings.ObjectRepo;
 
 public class HomePage extends PageBase {
 	
@@ -62,6 +64,21 @@ public class HomePage extends PageBase {
 	@FindBy(how=How.XPATH,using="//div[@id='main-nav']//a[text()='productSort']")
 	public WebElement productSort;
 	
+	@FindBy(how=How.ID,using="mini-cart")
+	public WebElement shoppingCart;
+	
+	@FindBy(how=How.NAME,using="search")
+	public WebElement searchTxtBox;
+	
+	@FindBy(how=How.XPATH,using="//form[@id='search-form']/div/span/button")
+	public WebElement searchBtn;
+	
+	@FindBy(how=How.ID,using="add-to-basket")
+	public WebElement reserve;
+	
+	@FindBy(how=How.PARTIAL_LINK_TEXT,using="Click here to view your shopping bag")
+	public WebElement viewShoppingBag;
+	
 	/** Default Methods **/
 	
 	String getMenuLocator(String name){
@@ -70,6 +87,11 @@ public class HomePage extends PageBase {
 	
 	
 	/** Public Methods  **/
+	
+	public void search(String searchStr) {
+		searchTxtBox.sendKeys(searchStr);
+		searchBtn.click();
+	}
 	
 	public void navigateTo(String name) {
 		driver.findElement(By.xpath(getMenuLocator(name))).click();
@@ -81,6 +103,15 @@ public class HomePage extends PageBase {
 	
 	public String getItems(){
 		return new TextBoxHelper(driver).getText(By.xpath("//span[@class='h4']"));
+	}
+	
+	public ItemsBag navigateToCart() {
+		waitForElement(viewShoppingBag, ObjectRepo.reader.getExplicitWait());
+		viewShoppingBag.click();
+		ItemsBag bag = new ItemsBag(driver);
+		waitForElement(bag.reserveYourItem, ObjectRepo.reader.getExplicitWait());
+		log.info("");
+		return bag;
 	}
 	
 	public LaptopPage navigateToLaptop(){
