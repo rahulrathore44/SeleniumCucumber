@@ -10,8 +10,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 
-import com.cucumber.framework.helper.PageObject.Userdetails;
 import com.cucumber.framework.helper.PageObject.homepage.HomePage;
+import com.cucumber.framework.helper.PageObject.userdetails.Userdetails;
 import com.cucumber.framework.settings.ObjectRepo;
 
 /**

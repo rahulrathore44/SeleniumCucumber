@@ -38,14 +38,17 @@ public class LaptopPage extends HomePage {
 	/** Internal Method **/
 	
 	String getBrandXpath(String name){
+		log.debug(name);
 		return "//div[@id='facetFilterOptions']//label[contains(.,'" + name + "')]";
 	}
 	
 	String getPriceXpath(String price){
+		log.debug(price);
 		return "//div[@id='facetFilterOptions']//label[contains(.,'" + price + "')]";
 	}
 	
 	String getItemXapth(String itemName,String shortDesp){
+		log.debug("ItemName : " + itemName + " ShortDesp : " + shortDesp);
 		return "//div[normalize-space()='" + shortDesp + "']/parent::*/parent::*//a[text()='" + itemName + "']";
 	}
 	
@@ -53,6 +56,7 @@ public class LaptopPage extends HomePage {
 		driver.findElement(By.xpath(getItemXapth(itemName, shortDesp))).click();
 		waitForElement(reserve, ObjectRepo.reader.getExplicitWait());
 		reserve.click();
+		log.info("");
 	}
 
 }

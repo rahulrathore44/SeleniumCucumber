@@ -36,6 +36,7 @@ public abstract class PageBase{
 	private WebDriver driver;
 	
 	private By getFindByAnno(FindBy anno){
+		log.info(anno);
 		switch (anno.how()) {
 		
 		case CLASS_NAME:
@@ -102,6 +103,7 @@ public abstract class PageBase{
 	}
 	
 	public boolean checkForTitle(String title){
+		log.info(title);
 		if(title == null || title.isEmpty())
 			throw new IllegalArgumentException(title);
 		return driver.getTitle().trim().contains(title);

@@ -82,6 +82,7 @@ public class HomePage extends PageBase {
 	/** Default Methods **/
 	
 	String getMenuLocator(String name){
+		log.debug(name);
 		return "//div[@id='main-nav']//a[text()='" + name + "']";
 	}
 	
@@ -91,14 +92,17 @@ public class HomePage extends PageBase {
 	public void search(String searchStr) {
 		searchTxtBox.sendKeys(searchStr);
 		searchBtn.click();
+		log.info(searchStr);
 	}
 	
 	public void navigateTo(String name) {
 		driver.findElement(By.xpath(getMenuLocator(name))).click();
+		log.info(name);
 	}
 	
 	public void selectProductOrder(String order){
 		new DropDownHelper(driver).SelectUsingVisibleValue(productSort, order);
+		log.info(order);
 	}
 	
 	public String getItems(){

@@ -3,7 +3,7 @@
  *	
  *	21-Aug-2016
  */
-package com.cucumber.framework.helper.PageObject;
+package com.cucumber.framework.helper.PageObject.userdetails;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -76,6 +76,7 @@ public class Userdetails extends HomePage {
 		flightDate.sendKeys(fDate);
 		new DropDownHelper(driver).SelectUsingVisibleValue(flightTime, ftime);
 		new DropDownHelper(driver).SelectUsingVisibleValue(reservationTerminal, terminal);
+		log.info("");
 	}
 	
 	
@@ -84,6 +85,7 @@ public class Userdetails extends HomePage {
 		lastName.sendKeys(lName);
 		emil.sendKeys(email);
 		this.phone.sendKeys(phone);
+		log.info("");
 	}
 
 
