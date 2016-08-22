@@ -9,6 +9,7 @@
 		<classes>
 			<class name="com.cucumber.framework.runner.SearchFeatureRunner" />
 			<class name="com.cucumber.framework.runner.LaptopFeatureRunner" />
+			<class name="com.cucumber.framework.runner.TabletFeatureRunner" />
 		</classes>
 	</test>
 </suite> 

@@ -5,14 +5,12 @@
  */
 package com.cucumber.framework.helper.PageObject.laptoppage;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 
 import com.cucumber.framework.helper.PageObject.homepage.HomePage;
-import com.cucumber.framework.settings.ObjectRepo;
 
 /**
  * @author rsr
@@ -37,26 +35,6 @@ public class LaptopPage extends HomePage {
 	
 	/** Internal Method **/
 	
-	String getBrandXpath(String name){
-		log.debug(name);
-		return "//div[@id='facetFilterOptions']//label[contains(.,'" + name + "')]";
-	}
 	
-	String getPriceXpath(String price){
-		log.debug(price);
-		return "//div[@id='facetFilterOptions']//label[contains(.,'" + price + "')]";
-	}
-	
-	String getItemXapth(String itemName,String shortDesp){
-		log.debug("ItemName : " + itemName + " ShortDesp : " + shortDesp);
-		return "//div[normalize-space()='" + shortDesp + "']/parent::*/parent::*//a[text()='" + itemName + "']";
-	}
-	
-	public void selectItem(String itemName,String shortDesp) {
-		driver.findElement(By.xpath(getItemXapth(itemName, shortDesp))).click();
-		waitForElement(reserve, ObjectRepo.reader.getExplicitWait());
-		reserve.click();
-		log.info("");
-	}
 
 }

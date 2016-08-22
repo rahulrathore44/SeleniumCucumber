@@ -119,49 +119,61 @@ public class InitializeWebDrive {
 		}
 	}
 	
-	@Before({"~@firefox","~@chrome","~@phantomjs"})
+	@Before({"~@firefox","~@chrome","~@phantomjs","~@iexplorer"})
 	public void before() throws Exception {
 		setUpDriver(ObjectRepo.reader.getBrowser());
 		oLog.info(ObjectRepo.reader.getBrowser());
 	}
 
-	@After({"~@firefox","~@chrome","~@phantomjs"})
+	@After({"~@firefox","~@chrome","~@phantomjs","~@iexplorer"})
 	public void after(Scenario scenario) throws Exception {
 		tearDownDriver(scenario);
 		oLog.info("");
 	}
+	
+	@Before(order=4,value={"@iexplorer"})
+	public void beforeExplorer() throws Exception {
+		setUpDriver(BrowserType.Iexplorer);
+		oLog.info(BrowserType.Iexplorer);
+	}
 
-	@Before("@firefox")
+	@After(order=4,value={"@iexplorer"})
+	public void afterExplorer(Scenario scenario) throws Exception {
+		tearDownDriver(scenario);
+		oLog.info("");
+	}
+
+	@Before(order=3,value={"@firefox"})
 	public void beforeFirefox() throws Exception {
 		setUpDriver(BrowserType.Firefox);
 		oLog.info(BrowserType.Firefox);
 	}
 
-	@After("@firefox")
+	@After(order=3,value={"@firefox"})
 	public void afterFirefox(Scenario scenario) throws Exception {
 		tearDownDriver(scenario);
 		oLog.info("");
 	}
 
-	@Before("@chrome")
+	@Before(order=2,value={"@chrome"})
 	public void beforeChrome() throws Exception {
 		setUpDriver(BrowserType.Chrome);
 		oLog.info(BrowserType.Chrome);
 	}
 
-	@After("@chrome")
+	@After(order=2,value={"@chrome"})
 	public void afterChrome(Scenario scenario) throws Exception {
 		tearDownDriver(scenario);
 		oLog.info("");
 	}
 
-	@Before("@phantomjs")
+	@Before(order=1,value={"@phantomjs"})
 	public void beforePhantomjs() throws Exception {
 		setUpDriver(BrowserType.PhantomJs);
 		oLog.info(BrowserType.PhantomJs);
 	}
 
-	@After("@phantomjs")
+	@After(order=1,value={"@phantomjs"})
 	public void afterPhantomjs(Scenario scenario) throws Exception {
 		tearDownDriver(scenario);
 		oLog.info("");

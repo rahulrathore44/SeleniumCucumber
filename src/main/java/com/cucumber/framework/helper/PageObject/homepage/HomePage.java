@@ -79,6 +79,23 @@ public class HomePage extends PageBase {
 	@FindBy(how=How.PARTIAL_LINK_TEXT,using="Click here to view your shopping bag")
 	public WebElement viewShoppingBag;
 	
+	/** Protected Methods **/
+	
+	protected String getBrandXpath(String name){
+		log.debug(name);
+		return "//div[@id='facetFilterOptions']//label[contains(.,'" + name + "')]";
+	}
+	
+	protected String getPriceXpath(String price){
+		log.debug(price);
+		return "//div[@id='facetFilterOptions']//label[contains(.,'" + price + "')]";
+	}
+	
+	protected String getItemXapth(String itemName,String shortDesp){
+		log.debug("ItemName : " + itemName + " ShortDesp : " + shortDesp);
+		return "//div[normalize-space()='" + shortDesp + "']/parent::*/parent::*//a[text()='" + itemName + "']";
+	}
+	
 	/** Default Methods **/
 	
 	String getMenuLocator(String name){
@@ -88,6 +105,13 @@ public class HomePage extends PageBase {
 	
 	
 	/** Public Methods  **/
+	
+	public void selectItem(String itemName,String shortDesp) {
+		driver.findElement(By.xpath(getItemXapth(itemName, shortDesp))).click();
+		waitForElement(reserve, ObjectRepo.reader.getExplicitWait());
+		reserve.click();
+		log.info("");
+	}
 	
 	public void search(String searchStr) {
 		searchTxtBox.sendKeys(searchStr);
