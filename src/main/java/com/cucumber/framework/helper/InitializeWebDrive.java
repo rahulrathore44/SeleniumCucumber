@@ -119,13 +119,13 @@ public class InitializeWebDrive {
 		}
 	}
 	
-	@Before
+	@Before({"~@firefox","~@chrome","~@phantomjs"})
 	public void before() throws Exception {
 		setUpDriver(ObjectRepo.reader.getBrowser());
 		oLog.info(ObjectRepo.reader.getBrowser());
 	}
 
-	@After
+	@After({"~@firefox","~@chrome","~@phantomjs"})
 	public void after(Scenario scenario) throws Exception {
 		tearDownDriver(scenario);
 		oLog.info("");
