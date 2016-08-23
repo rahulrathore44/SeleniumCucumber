@@ -1,12 +1,12 @@
-Feature: Adding a laptop to the Cart
+Feature: Adding a Tablet to the Cart
 
-  Scenario: Search Laptop and add it to the cart
+  Scenario: Search Tablet and add it to the cart
     Given : I am at the home page
-    When : I click on the tablet search filter
-    Then : I should be at the tablet search page with "51 items"
+    When : I click on the "Tablets" search filter
+    Then : I should be at the "Tablets" search page with "51 items"
     And : The title should be "Tablets" search page
-    Then : I select the tablet "APPLE iPad Mini 4" with description as "WiFi 64GB Silver"
-    And : Add tablet to the cart
+    Then : I select the "APPLE iPad Mini 4" with description as "WiFi 64GB Silver"
+    And : Add it to the cart
     Then : Navigate to user details page and provide the following details
       | Destination | Singapore  |
       | Airline     | AirAsia    |

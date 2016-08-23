@@ -10,6 +10,7 @@
 			<class name="com.cucumber.framework.runner.SearchFeatureRunner" />
 			<class name="com.cucumber.framework.runner.LaptopFeatureRunner" />
 			<class name="com.cucumber.framework.runner.TabletFeatureRunner" />
+			<class name="com.cucumber.framework.runner.SearchWithFilterRunner" />
 		</classes>
 	</test>
 </suite> 

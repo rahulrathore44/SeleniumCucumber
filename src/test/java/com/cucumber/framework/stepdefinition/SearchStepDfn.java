@@ -8,8 +8,6 @@ package com.cucumber.framework.stepdefinition;
 import org.testng.Assert;
 
 import com.cucumber.framework.helper.PageObject.homepage.HomePage;
-import com.cucumber.framework.helper.PageObject.laptoppage.LaptopPage;
-import com.cucumber.framework.helper.PageObject.tabletpage.TabletPage;
 import com.cucumber.framework.settings.ObjectRepo;
 
 import cucumber.api.java.en.And;
@@ -26,8 +24,6 @@ import cucumber.api.java.en.When;
 public class SearchStepDfn {
 	
 	private HomePage hPage;
-	private LaptopPage lPage;
-	private TabletPage tPage;
 
 	@Given("^: I am at the home page$")
 	public void _i_am_at_the_home_page() throws Throwable {
@@ -36,26 +32,16 @@ public class SearchStepDfn {
 		ObjectRepo.data.put("HomePage", hPage);
 	}
 
-	@When("^: I click on the laptops search filter$")
-	public void _i_click_on_the_laptops_search_filter() throws Throwable {
-		lPage = hPage.navigateToLaptop();
-		ObjectRepo.data.put("LaptopPage", lPage);
+	@When("^: I click on the \"([^\"]*)\" search filter$")
+	public void _i_click_on_the_something_search_filter(String search)
+			throws Throwable {
+		hPage.navigateTo(search);
 	}
 	
-	@When("^: I click on the tablet search filter$")
-    public void _i_click_on_the_tablet_search_filter() throws Throwable {
-		tPage = hPage.navigteToTablet();
-		ObjectRepo.data.put("TabletPage", tPage);
-    }
-
-	@Then("^: I should be at the laptop search page with \"([^\"]*)\"$")
-    public void _i_should_be_at_the_laptop_search_page_with_something(String items) throws Throwable {
-		Assert.assertEquals(lPage.getItems(),items);
-	}
-	
-	@Then("^: I should be at the tablet search page with \"([^\"]*)\"$")
-	public void _i_should_be_at_the_tablet_search_page_with_something(String items) throws Throwable {
-		Assert.assertEquals(tPage.getItems(),items);
+	@Then("^: I should be at the \"([^\"]*)\" search page with \"([^\"]*)\"$")
+	public void _i_should_be_at_the_something_search_page_with_something(
+			String title, String items) throws Throwable {
+		Assert.assertEquals(hPage.getItems(),items);
 	}
 	
 	@And("^: The title should be \"([^\"]*)\" search page$")

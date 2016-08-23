@@ -9,8 +9,6 @@ import org.openqa.selenium.support.How;
 import com.cucumber.framework.helper.DropDown.DropDownHelper;
 import com.cucumber.framework.helper.PageObject.PageBase;
 import com.cucumber.framework.helper.PageObject.itemsbag.ItemsBag;
-import com.cucumber.framework.helper.PageObject.laptoppage.LaptopPage;
-import com.cucumber.framework.helper.PageObject.tabletpage.TabletPage;
 import com.cucumber.framework.helper.TextBox.TextBoxHelper;
 import com.cucumber.framework.settings.ObjectRepo;
 
@@ -81,10 +79,10 @@ public class HomePage extends PageBase {
 	
 	/** Protected Methods **/
 	
-	protected String getBrandXpath(String name){
+	/*protected String getBrandXpath(String name){
 		log.debug(name);
 		return "//div[@id='facetFilterOptions']//label[contains(.,'" + name + "')]";
-	}
+	}*/
 	
 	protected String getPriceXpath(String price){
 		log.debug(price);
@@ -96,6 +94,11 @@ public class HomePage extends PageBase {
 		return "//div[normalize-space()='" + shortDesp + "']/parent::*/parent::*//a[text()='" + itemName + "']";
 	}
 	
+	protected String getBrandXpath(String bName){
+		log.debug(bName);
+		return "//div[@id='facets-nav']/div[2]//label[contains(normalize-space(),'" + bName + "')]";
+	}
+	
 	/** Default Methods **/
 	
 	String getMenuLocator(String name){
@@ -105,6 +108,10 @@ public class HomePage extends PageBase {
 	
 	
 	/** Public Methods  **/
+	
+	public WebDriver getDriver() {
+		return this.driver;
+	}
 	
 	public void selectItem(String itemName,String shortDesp) {
 		driver.findElement(By.xpath(getItemXapth(itemName, shortDesp))).click();
@@ -133,6 +140,16 @@ public class HomePage extends PageBase {
 		return new TextBoxHelper(driver).getText(By.xpath("//span[@class='h4']"));
 	}
 	
+	public void selectBrands(String name) {
+		log.info(name);
+		driver.findElement(By.xpath(getBrandXpath(name))).click();
+	}
+	
+	public void selectPrice(String price){
+		log.info(price);
+		driver.findElement(By.xpath(getBrandXpath(price))).click();
+	}
+	
 	public ItemsBag navigateToCart() {
 		waitForElement(viewShoppingBag, ObjectRepo.reader.getExplicitWait());
 		viewShoppingBag.click();
@@ -141,21 +158,4 @@ public class HomePage extends PageBase {
 		log.info("");
 		return bag;
 	}
-	
-	public LaptopPage navigateToLaptop(){
-		laptops.click();
-		LaptopPage lPage = new LaptopPage(driver);
-		waitForElement(lPage.title, 60);
-		log.info("");
-		return lPage;
-	}
-	
-	public TabletPage navigteToTablet() {
-		tablets.click();
-		TabletPage tPage = new TabletPage(driver);
-		waitForElement(tPage.title, 60);
-		log.info("");
-		return tPage;
-	}
-
 }
