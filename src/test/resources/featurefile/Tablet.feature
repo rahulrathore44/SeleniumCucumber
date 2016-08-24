@@ -11,7 +11,7 @@ Feature: Adding a Tablet to the Cart
       | Destination | Singapore  |
       | Airline     | AirAsia    |
       | FlightNo    | A089       |
-      | FlightDate  | 24/08/2016 |
+      | FlightDate  | 24/08/2018 |
       | FlightTime  | 5:00       |
       | Terminal    | Terminal 1 |
       | FirstName   | Selenium   |

@@ -52,6 +52,23 @@ public class GridHelper extends GenericHelper {
 		return null;
 	}
 	
+	protected int searchInGrid(String description,String tableIdoRxPath,int row,final int column){
+		
+		WebElement element;
+		
+		while((element = getElementWithNull(By.xpath(getTableBodyXpath(tableIdoRxPath) + "//tr[" + row + "]//td[" + column + "]"))) != null){
+			
+			if(!element.getText().isEmpty()){
+				oLog.info(element.getText());
+				if(element.getText().trim().contains(description))
+					return row;
+			}
+			row++;
+		}
+		
+		throw new IllegalArgumentException("No matching description found : " + description);
+	}
+	
 	public List<String> getGridHeading(String tableIdoRxPath){
 		List<String> header = new LinkedList<String>();
 		
@@ -79,6 +96,12 @@ public class GridHelper extends GenericHelper {
 		WebElement element =  getGridElement(tableIdoRxPath,row,column);
 		element.clear();
 		element.sendKeys(value);
+	}
+	
+	public void typeInGrid(String description,String tableIdoRxPath,int row,int column,String value) {
+		oLog.info(tableIdoRxPath + "," + row + "," + column + "," + value + "," + description);
+		int index =  searchInGrid(description,tableIdoRxPath,row,column);
+		typeInGrid(tableIdoRxPath,index,3,value);
 	}
 
 }

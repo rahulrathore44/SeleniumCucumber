@@ -15,6 +15,7 @@ import com.cucumber.framework.helper.Grid.GridHelper;
 import com.cucumber.framework.helper.Logger.LoggerHelper;
 import com.cucumber.framework.helper.PageObject.homepage.HomePage;
 import com.cucumber.framework.helper.PageObject.userdetails.Userdetails;
+import com.cucumber.framework.settings.GridLocator;
 import com.cucumber.framework.settings.ObjectRepo;
 
 /**
@@ -54,7 +55,12 @@ public class ItemsBag extends HomePage {
 	}
 	
 	public void updateQuantity(String qty) {
-		grid.typeInGrid("cart", 1, 3, qty);
+		grid.typeInGrid(GridLocator.cartId, 1, 3, qty);
+		updateBasket.click();
+	}
+	
+	public void updateQuantity(String item,String qty) {
+		grid.typeInGrid(item,GridLocator.cartId,1,1,qty);
 		updateBasket.click();
 	}
 

@@ -40,5 +40,13 @@ public class SearchWithFilter {
 		bag = (ItemsBag)ObjectRepo.data.get("ItemsBag");
 		bag.updateQuantity(qty);
     }
+	
+	@Then("^: I change the quantity of item \"([^\"]*)\" to \"([^\"]*)\" and click on update button$")
+	public void _i_change_the_quantity_of_item_something_to_something_and_click_on_update_button(
+			String item, String qty) throws Throwable {
+		bag = (ItemsBag)ObjectRepo.data.get("ItemsBag");
+		bag.updateQuantity(item, qty);
+		System.out.println();
+	}
 
 }
