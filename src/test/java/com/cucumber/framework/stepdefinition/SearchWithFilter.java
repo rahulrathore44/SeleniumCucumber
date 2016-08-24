@@ -6,6 +6,7 @@
 package com.cucumber.framework.stepdefinition;
 
 import com.cucumber.framework.helper.PageObject.homepage.HomePage;
+import com.cucumber.framework.helper.PageObject.itemsbag.ItemsBag;
 import com.cucumber.framework.settings.ObjectRepo;
 
 import cucumber.api.java.en.And;
@@ -20,6 +21,7 @@ import cucumber.api.java.en.Then;
 public class SearchWithFilter {
 	
 	private HomePage hPage;
+	private ItemsBag bag;
 	
 	@Then("^: I select \"([^\"]*)\" as the brand$")
     public void _i_select_something_as_the_brand(String brand) throws Throwable {
@@ -32,5 +34,10 @@ public class SearchWithFilter {
 			throws Throwable {
 		hPage.selectPrice(price);
 	}
-	
+
+	@Then("^: I change the quantity to \"([^\"]*)\" and click on update button$")
+    public void _i_change_the_quantity_to_something_and_click_on_update_button(String qty) throws Throwable {
+		bag.updateQuantity(qty);
+    }
+
 }

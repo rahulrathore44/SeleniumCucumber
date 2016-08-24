@@ -32,7 +32,7 @@ import com.google.common.base.Function;
 @SuppressWarnings("rawtypes")
 public abstract class PageBase{
 	
-	protected final Logger log = LoggerHelper.getLogger(PageBase.class);
+	private final Logger log = LoggerHelper.getLogger(PageBase.class);
 	private WebDriver driver;
 	
 	private By getFindByAnno(FindBy anno){

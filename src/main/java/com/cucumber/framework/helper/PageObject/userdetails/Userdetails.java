@@ -5,12 +5,14 @@
  */
 package com.cucumber.framework.helper.PageObject.userdetails;
 
+import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 
 import com.cucumber.framework.helper.DropDown.DropDownHelper;
+import com.cucumber.framework.helper.Logger.LoggerHelper;
 import com.cucumber.framework.helper.PageObject.homepage.HomePage;
 
 /**
@@ -22,6 +24,7 @@ import com.cucumber.framework.helper.PageObject.homepage.HomePage;
 public class Userdetails extends HomePage {
 
 	private WebDriver driver;
+	private final Logger log = LoggerHelper.getLogger(Userdetails.class);
 	
 	public Userdetails(WebDriver driver) {
 		super(driver);
