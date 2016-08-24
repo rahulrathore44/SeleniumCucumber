@@ -37,6 +37,7 @@ public class SearchWithFilter {
 
 	@Then("^: I change the quantity to \"([^\"]*)\" and click on update button$")
     public void _i_change_the_quantity_to_something_and_click_on_update_button(String qty) throws Throwable {
+		bag = (ItemsBag)ObjectRepo.data.get("ItemsBag");
 		bag.updateQuantity(qty);
     }
 

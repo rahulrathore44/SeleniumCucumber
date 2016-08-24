@@ -62,8 +62,11 @@ public class GenericHelper implements IwebComponent {
 	
 	public WebElement getElementWithNull(By locator) {
 		oLog.info(locator);
-		if (IsElementPresentQuick(locator))
+		try {
 			return driver.findElement(locator);
+		} catch (NoSuchElementException e) {
+			// Ignore
+		}
 		return null;
 	}
 
