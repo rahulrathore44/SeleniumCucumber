@@ -8,7 +8,8 @@ Feature: Search with specific filter and add it to cart
     Then : I select "SONY" as the brand
     And : I select "£40 - £80" as the price filter
     Then : I should be at the "Speakers" search page with "3 items"
-
+	
+	@firefox
   Scenario: Validation of Item Bag page
     Given : I am at the home page
     When : I click on the "Speakers" search filter
