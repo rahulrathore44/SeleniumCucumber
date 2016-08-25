@@ -15,6 +15,8 @@ import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
+import com.cucumber.framework.utility.ResourceHelper;
+
 /**
  * @author rsr
  *
@@ -28,10 +30,12 @@ public class FirefoxBrowser {
 		profile.setAcceptUntrustedCertificates(true);
 		profile.setAssumeUntrustedCertificateIssuer(true);
 		firefox.setCapability(FirefoxDriver.PROFILE, profile);
+		firefox.setCapability("marionette", true);
 		return firefox;
 	}
 	
 	public WebDriver getFirefoxDriver(Capabilities cap) {
+		System.setProperty("webdriver.gecko.driver", ResourceHelper.getResourcePath("driver/geckodriver.exe"));
 		return new FirefoxDriver(cap);
 	}
 	

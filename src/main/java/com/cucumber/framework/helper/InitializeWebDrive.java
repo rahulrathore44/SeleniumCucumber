@@ -5,7 +5,6 @@
  */
 package com.cucumber.framework.helper;
 
-import java.net.MalformedURLException;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.log4j.Logger;
@@ -39,42 +38,6 @@ public class InitializeWebDrive {
 
 	public InitializeWebDrive(PropertyFileReader reader) {
 		ObjectRepo.reader = reader;
-	}
-
-	public WebDriver gridSetUp(String hubUrl, String browser)
-			throws MalformedURLException {
-
-		oLog.info(hubUrl + " : " + browser);
-
-		switch (BrowserType.valueOf(browser)) {
-
-		case Chrome:
-			ChromeBrowser chrome = new ChromeBrowser();
-			return chrome.getChromeDriver(hubUrl,
-					chrome.getChromeCapabilities());
-
-		case Firefox:
-			FirefoxBrowser firefox = new FirefoxBrowser();
-			return firefox.getFirefoxDriver(hubUrl,
-					firefox.getFirefoxCapabilities());
-
-		case HtmlUnitDriver:
-
-		case Iexplorer:
-			IExploreBrowser iExplore = new IExploreBrowser();
-			return iExplore.getIExplorerDriver(hubUrl,
-					iExplore.getIExplorerCapabilities());
-
-		case PhantomJs:
-			PhantomJsBrowser jsBrowser = new PhantomJsBrowser();
-			return jsBrowser.getPhantomJsDriver(hubUrl,
-					jsBrowser.getPhantomJsService(),
-					jsBrowser.getPhantomJsCapability());
-
-		default:
-			throw new NoSutiableDriverFoundException(" Driver Not Found : "
-					+ ObjectRepo.reader.getBrowser());
-		}
 	}
 
 	public WebDriver standAloneStepUp(BrowserType bType) throws Exception {
