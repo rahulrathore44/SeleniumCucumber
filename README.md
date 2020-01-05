@@ -13,6 +13,11 @@ The framework has following features
 7. POM
 8. Hooks for different browser support (using tag @chrome,@firefox...)
 
+### YouTube Playlist
+
+- **Cucumber Framework** https://www.youtube.com/playlist?list=PLlsKgYi2Lw73j-yB8SBzrUBpMYL1Jr3M7
+- **TestNg** https://www.youtube.com/playlist?list=PLlsKgYi2Lw73Cs109qNoAc-V0rDnXzpAY
+
 ### Here is the basic code:
 
 To use the class for handling the web component create the object and use it
