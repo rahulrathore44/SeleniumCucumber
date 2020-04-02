@@ -1,7 +1,7 @@
 Feature: Adding a laptop to the Cart
 
   @chrome
-  Scenario: Search Laptop and add it to the cart
+  Scenario: Search Laptops and add it to the cart
     Given : I am at the home page
     When : I click on the "Laptops" search filter
     Then : I should be at the "Laptops" search page with "35 items"
