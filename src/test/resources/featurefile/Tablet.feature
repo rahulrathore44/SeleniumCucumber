@@ -1,6 +1,6 @@
 Feature: Adding a Tablet to the Cart
 
-  Scenario: Search Tablet and add it to the cart
+  Scenario: Search Tablets and add it to the cart
     Given : I am at the home page
     When : I click on the "Tablets" search filter
     Then : I should be at the "Tablets" search page with "51 items"
