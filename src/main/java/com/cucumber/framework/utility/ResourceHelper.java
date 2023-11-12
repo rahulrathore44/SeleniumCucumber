@@ -23,7 +23,7 @@ public class ResourceHelper {
 	}
 	
 	public static String getBaseResourcePath() {
-		String path = ResourceHelper.class.getClass().getResource("/").getPath();
+		String path = ResourceHelper.class.getClassLoader().getResource(".").getPath();
 		return path;
 	}
 	

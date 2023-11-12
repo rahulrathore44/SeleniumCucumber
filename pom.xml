@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
@@ -14,8 +15,8 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<aspectj.version>1.7.4</aspectj.version>
 		<allure.version>1.4.22</allure.version>
-		<maven.compiler.source>1.7</maven.compiler.source>
-		<maven.compiler.target>1.7</maven.compiler.target>
+		<maven.compiler.source>11</maven.compiler.source>
+		<maven.compiler.target>11</maven.compiler.target>
 	</properties>
 	<build>
 		<plugins>
@@ -63,11 +64,13 @@
 					<properties>
 						<property>
 							<name>listener</name>
-							<value>ru.yandex.qatools.allure.testng.AllureTestListener</value>
+							<value>
+								ru.yandex.qatools.allure.testng.AllureTestListener</value>
 						</property>
 					</properties>
 					<suiteXmlFiles>
-						<suiteXmlFile>src/test/java/com/cucumber/framework/testng/testng.xml</suiteXmlFile>
+						<suiteXmlFile>
+							src/test/java/com/cucumber/framework/testng/testng.xml</suiteXmlFile>
 					</suiteXmlFiles>
 				</configuration>
 				<dependencies>
@@ -83,7 +86,8 @@
 				<artifactId>jetty-maven-plugin</artifactId>
 				<version>9.2.10.v20150310</version>
 				<configuration>
-					<webAppSourceDirectory>${project.build.directory}/site/allure-maven-plugin</webAppSourceDirectory>
+					<webAppSourceDirectory>
+						${project.build.directory}/site/allure-maven-plugin</webAppSourceDirectory>
 					<stopKey>stop</stopKey>
 					<stopPort>1234</stopPort>
 				</configuration>
@@ -93,6 +97,11 @@
 	</build>
 
 	<dependencies>
+		<dependency>
+			<groupId>javax.xml.bind</groupId>
+			<artifactId>jaxb-api</artifactId>
+			<version>2.3.1</version>
+		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
